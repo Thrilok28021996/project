@@ -5,6 +5,7 @@ from sklearn import tree
 
 import os
 import config
+import model_dispatcher
 
 import argparse
 
@@ -31,7 +32,8 @@ def run(fold):
 	y_valid = df_train.label.values
 
 	# initialize simple decision tree classifier from sklearn
-	clf = tree.DecisionTreeClassifier()
+	#clf = tree.DecisionTreeClassifier()
+	clf = model_dispatcher.models[model]
 
 	# fit the model on training data
 	clf.fit(x_train,y_train)
@@ -53,11 +55,13 @@ if __name__ == "__main__":
 	# add the different arguments you need and their type
 	# currently, we only need fold
 	parser.add_argument("--fold", type=int)
+	parser.add_argument("--model", type=str)
 	# read the arguments from the command line
 	args = parser.parse_args()
 
 	# run the fold specified by command line arguments
-	run(fold = args.fold)
+	run(fold = args.fold,
+		model=args.model)
 	# run(fold=0)
 	# run(fold=1)
 	# run(fold=2)
