@@ -7,4 +7,6 @@ models = {
 		criterion = "gini"),
 	"decision_tree_entropy" : tre.DecisionTreeClassifier(
 		criterion="entropy"),
+
+	"rf" : ensemble.RandomForestClassifier(),
 }
